@@ -1,0 +1,49 @@
+/*
+*
+* Tendencia
+* @date 16.01.13
+*
+* Bloque editable
+*
+*/
+
+/* Homepage */
+.tendencia{
+	width: 277px;
+	height: 109px;
+	top: 42px;
+	right: 42px;
+	background: url(../img/tendencia/logo-herencia.png) no-repeat;
+}
+
+	.tendencia-btn{
+		width:243px;
+		height: 80px;
+		bottom: 51px;
+		right: 27px;
+		background: url(../img/tendencia/tendencia-btn.png) no-repeat;
+	}
+
+
+/* Interior Tendencia */
+.escaparate-detalle{
+	width: 66px;
+	height: 183px;
+	left: 204px;
+	bottom: -35px;
+	background: url(../img/tendencia/cardenal-01.png) no-repeat;
+}
+
+.recomendacion-detalle{
+	width: 76px;
+	height: 125px;
+	right: 16px;
+	bottom: -49px;
+	z-index: 999;
+	background: url(../img/tendencia/cardenal-02.png) no-repeat;
+}
+
+.concept{
+	
+	background: url(../img/tendencia/detalle-concepto.jpg) bottom no-repeat;
+}

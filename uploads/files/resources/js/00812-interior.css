@@ -1,0 +1,638 @@
+/*
+*
+* Interior
+* @date 22.01.13
+*
+*
+*/
+
+/* $structure ----------------------------------------------------- */
+
+/* Interior Tendencia */
+.board{}
+
+.inner-showcase-container{
+	height: 450px;
+	position: relative;
+}
+
+	.slider{
+		overflow: hidden;
+	}
+
+		.slider .pin-component{
+			right: 30px;
+			bottom: 30px;
+		}
+
+		.slider .heading{
+			top: 46px;
+			left: 46px;
+		}
+
+		.slider .inner-showcase,
+		.slider .inner-showcase li{
+			display: block;
+			width: 990px;
+			height: 450px;
+		}
+
+		.slider .inner-showcase{ overflow: hidden;}
+
+
+		.heading{
+			color: #fff;
+			text-shadow: 0 0 2px rgba(0,0,0,0.8);
+		}
+
+			.heading h2{
+				text-transform: uppercase;
+				font-family: 'tempelhofRegular', Helvetica, sans-serif;
+				font-size: 38px;
+				line-height: 0.8em;
+				margin-bottom: 0.5em;
+			}
+				.heading h2 span{
+					font-size: 28px;
+					color: #ffb718;
+					letter-spacing: 0.01em
+				}
+
+			.heading h3{
+				font-family: 'tempelhofRegular', Helvetica, sans-serif;
+				font-size: 16px;
+				letter-spacing: 0.03em
+			}
+
+
+	.concept{
+		position: relative;
+		/* min-height: 550px;*/
+		height: 490px; /* 550px */
+		padding-top: 60px;
+	}
+
+		.concept .tagline{ top: 222px;}
+
+		.concept .article{
+			width: 486px;
+			margin-right: 126px;
+		}
+
+	.teaser .showcase-container{
+
+		/*min-height: 550px;*/
+		height: 550px;
+		border-bottom: 0;
+	}
+
+		.inner-gallery{
+
+			/*min-height: 550px;*/
+			height: 550px;
+			overflow: hidden;
+		}
+
+	.season-products{
+		position: relative;
+		min-height: 650px;
+	}
+
+		.season-products .tagline{ top: 90px;}
+
+		.season-products .article{
+			clear: left;
+			width: 252px;
+			margin-top: 384px;
+			margin-left: 46px;
+		}
+
+		.season-products .featured-products{
+			margin-top: 30px;
+			margin-right: 30px;
+			width: 608px;
+			height: 589px;
+			border: 1px solid #c5b7ad;
+		}
+
+		.season-products .featured-showcase,
+		.season-products .featured-showcase li{
+			width: 608px;
+			height: 584px;
+			border-bottom: 5px solid #5d4436;
+		}
+
+	.season-advice{
+		position: relative;
+		min-height: 450px;
+		max-height: 650px;
+	}
+
+		.season-advice .tagline{ top: 30px;}
+
+		.season-advice .article{
+			clear: left;
+			width: 252px;
+			margin-left: 46px;
+			margin-top: 162px;
+		}
+
+		.season-advice .advice-products{
+			margin-right: 30px;
+			width: 610px;
+			height: 435px;
+			position: relative;
+		}
+
+		.season-advice .featured-showcase,
+		.season-advice .featured-showcase li{
+			width: 610px;
+			height: 435px;
+		}
+
+	.season-poster{
+		/*min-height: 450px;*/
+		height: 450px;
+	}
+
+
+	.brand-detail{
+		_min-height: 620px;
+
+		padding-bottom: 30px;
+
+		position: relative;
+		background: #f8f8f8;
+	}
+
+		.brand-detail .tagline{ top: 30px;}
+
+		.brand-detail .custom-search{
+			float: right;
+			margin-right: 31px;
+			margin-top: 30px;
+			margin-bottom: 19px;
+		}
+
+		.brand-detail .txt-link{ margin-right: 31px;}
+		.brand-detail a.layer{
+			right: 0;
+			top: 78px;
+		}
+		
+
+		.frame-box{
+			width: 441px;
+			height: 485px;
+			text-align: center;
+			padding: 0 5px;
+			background: url(../img/core/ui/frame-box-dropshadow.png) center no-repeat;
+		}
+
+			.frame{
+				display: block;
+				padding: 14px;
+				border: 1px solid #e2e2e2;
+				background: #fff;
+			}
+
+
+
+	/* Collection Gallery */
+	.brand-collection{
+		height: 530px; /* 560px */
+		padding: 15px;
+		position: relative;
+	}
+
+		.brand-collection .tagline{ top: 32px;}
+
+		.collection-gallery{ position: relative;}
+
+		.collection-gallery,
+		.collection-showcase,
+		.collection-item{
+			width: 960px;
+			height: 530px;
+			overflow: hidden;
+		}
+
+			.collection-item{
+				_background: #f90;
+				position: relative;
+			}
+
+				.collection-item .list{
+					width: 260px;
+					top: 226px;
+					right: 22px;
+				}
+
+				.list{
+					font-family: 'tempelhofRegular', sans-serif;
+					font-size: 14px;
+					letter-spacing: 0.01em;
+					list-style: inside disc;
+				}
+					.list li{ margin-bottom: 0.5em;}
+
+			.collection-gallery .review{
+				width: 260px;
+				top: 88px;
+				right: 22px;
+				_background: rgba(255,255,255,0.8);
+			}
+
+			.collection-gallery .footer-line{
+				width: 100%;
+				bottom: 1em;
+			}
+
+			.footer-line{
+				font-family: 'tempelhofRegular', sans-serif;
+				font-size: 14px;
+				letter-spacing: 0.02em;
+				text-align: center;
+				color: #987a6b;
+			}
+
+				.footer-line a{
+					font-family: 'tempelhofMedium', sans-serif;
+					color: #666;
+				}
+					.footer-line a:hover{ color: #fdb618}
+
+
+	.mini-catalog{
+		height: 495px;
+		padding: 0 1px;
+		position: relative;
+	}
+
+		.mini-catalog .gallery-header{ height: 120px;}
+
+		.mini-catalog .tagline{	top: 44px;}
+
+
+	.catalog{
+		padding: 0 1px;
+		position: relative;
+		background: #f8f8f8;
+	}
+
+		.catalog .catalog-showcase{
+			margin-top: 30px;
+			padding-bottom: 44px;
+		}
+
+
+
+		/*.gallery-item{
+			margin-bottom: 30px;
+		}*/
+
+
+
+
+.review-item{
+	padding: 15px 45px 0;
+	position: relative;
+}
+
+	.review-item .frame-box,
+	.review-item .review{ float: left;}
+
+	.review-item .frame-box{ margin-right: 13px;}
+
+	.review-item .mini-social-box{
+		right: 30px;
+		bottom: 0;
+		margin-top: 30px;
+	}
+
+	.review-item .review{
+		padding: 30px 0 60px; 
+		width: 300px;
+	}
+
+		.review h2{
+			font-family: 'tempelhofMedium', sans-serif;
+			font-size: 24px;
+			text-transform: uppercase;
+			letter-spacing: 0.02em;
+			margin-bottom: 1.5em;
+			color: #917f77;
+		}
+
+		.review h3,
+		.review h4{ font-family: 'tempelhofRegular', sans-serif;}
+
+		.review h3{
+			font-size: 18px;
+			margin-bottom: 0.8em;
+		}
+
+		.review h4{
+			font-size: 16px;
+			margin-bottom: 0.6em;
+		}
+
+		.review p{
+			font-family: Arial, sans-serif;
+			font-size: 13px;
+			line-height: 1.3em;
+		}
+
+		.review-item .review h3+p{ margin-bottom: 4.5em;}
+
+
+
+.article{
+	
+}
+
+	.article h4{
+		font-family: 'tempelhofRegular', Helvetica, sans-serif;
+		font-size: 22px;
+		line-height: 1.2em;
+		margin-bottom: 1em;
+		color: #918077;
+	}
+
+	.article h5{
+		font-family: 'tempelhofRegular', Helvetica, sans-serif;
+		font-size: 18px;
+		margin-bottom: 1em;
+	}
+
+	.article p{
+		font-family: Arial, sans-serif;
+		font-size: 13px;
+		line-height: 1.2em;
+		margin-bottom: 1em;
+	}
+	
+	.article p+h5{ margin-top: 45px;}
+
+
+
+/* $gallery-panel ------------------------------------------------- */
+.mask{
+	_position: absolute;
+	_clip: rect(0px, 990px, 990px, 0px);
+}
+
+.gallery-panel{
+	position: relative;
+}
+
+	.catalog-showcase{ 
+		overflow: hidden;
+		padding-bottom: 74px; 
+	}
+
+		.extended{}
+
+		.extended .catalog-item{ margin-bottom: 30px;}
+
+
+	.gallery-panel .tagline{ top: 30px;}
+	
+	.gallery-panel .custom-search{
+		_position: absolute;
+		_right: 31px;
+		_top: 46px;
+
+		float: right;
+		margin-right: 31px;
+		margin-top: 46px;
+	}
+
+	.gallery-header{ height: 90px;}
+	
+	.gallery-header .order{
+		right: 28px;
+		top: 32px;
+	}
+
+	.gallery-container{
+		width: 990px;
+		
+			_height: 530px;
+
+		padding: 30px 0 60px;
+		overflow: hidden;
+	}
+
+		.gallery-showcase{
+			float: left;
+				_background: #bebebe;
+		}
+
+		.gallery-item{
+			display: block;
+			float: left;
+		}
+
+			.gallery-item *{
+				-webkit-transition: all 0.5s ease;
+				   -moz-transition: all 0.5s ease;
+					-ms-transition: all 0.5s ease;
+					 -o-transition: all 0.5s ease;
+						transition: all 0.5s ease;
+			}
+
+			.gallery-item em,
+			.gallery-item q,
+			.gallery-item img{ display: block;}
+
+
+			.gallery-item:hover span{
+				border-color: #ddd;
+				_border-color: #fdb618;
+				_background: #fefefe;
+				box-shadow: 0 0 4px 1px rgba(0,0,0,0.1);
+			}
+			
+			.gallery-item:hover em,
+			.gallery-item:hover q,
+			.gallery-item:hover img{ color: #fdb618;}
+
+			.brands-category,
+			.brands{
+				text-align: center;
+				padding: 0 4px;
+				margin: 15px 10px;
+				color: #333;
+			}
+
+			.brands-category{
+				background: url(../img/core/ui/category-brands-box-dropshadow.png) center no-repeat;
+			}
+
+				.brands-category span,
+				.brands span{
+					display: block;
+					border: 1px solid #e2e2e2;
+					padding: 14px;
+					background: #fff;
+				}
+
+				.brands-category span{
+					width: 270px; /* 300px */
+					height: 205px; /* 235px */
+				}
+
+				.brands-category img{
+					width: 270px;
+					height: 160px;
+					margin-bottom: 14px;
+					background: #eee;
+				}
+
+				.brands-category em,
+				.catalog-item em{
+					font-family: 'tempelhofRegular', sans-serif;
+					font-size: 14px;
+				}
+
+				.brands-category q,
+				.catalog-item q{
+					font-family: 'tempelhofMedium', sans-serif;
+					font-size: 16px;
+					text-transform: uppercase;
+					color: #795946;
+				}
+
+			.brands{
+				background: url(../img/core/ui/brands-box-dropshadow.png) center no-repeat;
+			}
+
+				.brands span{
+					width: 189px; /* 219px */
+					height: 170px; /* 200px */
+				}
+
+				.brands img{
+					width: 189px;
+					height: 140px;
+					margin-bottom: 16px;
+					background: #eee;
+				}
+
+				.brands em{
+					font-family: 'tempelhofRegular', sans-serif;
+					font-size: 13px;
+				}
+
+
+			.catalog-slide .catalog-item{
+				display: block;
+				float: left;
+			}
+
+			.catalog-item{
+				text-align: center;
+				padding: 0 4px;
+				margin: 0 10px;
+				color: #333;
+				background: url(../img/core/ui/catalog-box-dropshadow.png) center no-repeat;
+			}
+
+				.catalog-item span{
+					display: block;
+					width: 215px; /* 219px */
+					border: 1px solid #e2e2e2;
+					padding: 1px;
+					background: #fff;
+				}
+
+				.catalog-item strong{
+					display: block;
+					font-weight: normal;
+					
+					height: 296px; /* 300px */
+					background: #f8f8f8;
+				}
+
+				.catalog-item img{
+					width: 215px;
+					height: 198px;
+					background: #eee;
+					margin-bottom: 25px;
+				}
+
+					.catalog-item q{ margin-bottom: 12px;}
+					
+					.catalog-item em{
+						font-size: 13px;
+						line-height: 1.2em;
+						padding: 0 1.5em;
+					}
+
+
+
+/* $taglines ------------------------------------------------------ */
+.ribbon,
+.ribbon a{
+	width: 250px; /* 302px */
+	height: 32px;
+	line-height: 30px;
+}
+
+.ribbon{
+	font-family: 'tempelhofRegular', Helvetica, sans-serif;
+	font-size: 26px;
+	text-transform: uppercase;
+	color: #fff;
+	padding-left: 52px;
+	overflow: hidden;
+	background: url(../img/core/ui/tagline-ribbon.png) no-repeat;
+}
+
+	.ribbon a{
+		-webkit-transition: all 0.2s ease;
+		   -moz-transition: all 0.2s ease;
+			-ms-transition: all 0.2s ease;
+			 -o-transition: all 0.2s ease;
+				transition: all 0.2s ease;
+
+		padding-right: 24px;
+		background: url(../img/core/ui/ribbon-breadcrumb.png) center right no-repeat;
+	}
+
+		.ribbon a:hover{ padding-right: 32px;}
+
+
+.tagline{
+	position: absolute;
+	left: -6px;
+	z-index: 999;
+}
+
+	.tagline .ribbon{ margin-bottom: 21px;}
+	.tagline .short{ margin-bottom: 12px;}
+
+
+	.tagline h3,
+	.tagline h4{
+		font-family: 'tempelhofRegular', Helvetica, sans-serif;
+		font-size: 16px;
+		letter-spacing: 0.02em;
+		padding-left: 52px;
+		color: #333;
+	}
+		.tagline h3 span{
+			font-size: 22px;
+			font-family: 'tempelhofRegular', Helvetica, sans-serif;
+			color: #795946;
+		}
+
+			.tagline h4{}
+	
+				.tagline h4 span{
+					font-family: 'tempelhofMedium', Helvetica, sans-serif;
+					color: #795946;
+				}
+
+				.tagline h4 i{ font-style: italic;}

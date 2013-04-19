@@ -1,0 +1,147 @@
+/*
+*
+* @date 16.01.13
+*
+*
+*/
+/* $previous button - $next button -------------------------------- */
+.bx-prev,
+.bx-next{
+    text-indent: -9999px;
+	overflow: hidden;
+    position: absolute;
+    z-index: 99;
+    background-repeat: no-repeat;
+}
+
+	.bx-prev{ background-position: top left;}
+	.bx-next{ background-position: top right;}
+
+		.bx-prev:hover{ background-position: bottom left;}
+		.bx-next:hover{ background-position: bottom right;}
+
+
+/* $pager wrapper ------------------------------------------------- */
+.bx-pager{
+	position: absolute;
+	z-index: 99;
+}
+	/* pager links */
+	.bx-pager .pager-link{
+		text-indent: -99px;
+		display: block;
+		width: 12px;
+		height: 12px;
+		float: left;
+		cursor: pointer;
+		margin: 0 5px;
+		overflow: hidden;
+		background: url(../img/core/showcase/numbers.png) top left no-repeat;
+	}
+		.bx-pager .pager-linka:hover{ background-position: bottom left;}
+		.bx-pager .pager-active{ background-position: bottom left;}
+
+
+/* $showcase ------------------------------------------------------ */
+.showcase-container .bx-prev,
+.showcase-container .bx-next{
+	width: 23px; 
+	height: 34px;
+	top: 50%;
+	margin-top: -34px;
+    background-image: url(../img/core/showcase/arrows-btn.png);
+}
+
+	.showcase-container .bx-prev{ left: 9px;}
+	.showcase-container .bx-next{ right: 9px;}
+
+.showcase-container .bx-pager{ bottom: 12px;}
+
+.teaser .bx-pager{ bottom: 17px;}
+
+
+/* $mini-arrow-btn ------------------------------------------------ */
+.featured-products .bx-prev,
+.featured-products .bx-next,
+.collection-gallery .bx-prev,
+.collection-gallery .bx-next,
+.gallery-panel .bx-prev,
+.gallery-panel .bx-next,
+.catalog .bx-prev,
+.catalog .bx-next{
+	width: 14px; 
+	height: 22px;
+    background-image: url(../img/core/showcase/mini-arrow-btn.png);
+}
+
+
+/* $productos-destacados ------------------------------------------ */
+.featured-products .bx-prev,
+.featured-products .bx-next,
+.collection-gallery .bx-prev,
+.collection-gallery .bx-next{
+	top: 50%;
+	margin-top: -22px;
+}
+
+	.featured-products .bx-prev{ left: 11px;}
+	.featured-products .bx-next{ right: 11px;}
+
+.featured-products .bx-pager{
+	left: 10px;
+	bottom: 12px;
+}
+
+
+/* $gallery-panel ------------------------------------------------- */
+.gallery-panel .bx-prev,
+.gallery-panel .bx-next{ bottom: 19px;}
+
+	.gallery-panel .bx-prev{ left: 20px; /*left: 350px;*/}
+	.gallery-panel .bx-next{ right: 20px; /*right: 350px*/}
+
+.gallery-panel .bx-pager{
+	left: 50%;
+	bottom: 24px;
+}
+
+
+/* $collection-gallery -------------------------------------------- */
+.collection-gallery .bx-prev{ left: 14px; /*left: 350px;*/}
+.collection-gallery .bx-next{ right: 14px; /*right: 350px*/}
+
+
+/* $numeral ------------------------------------------------------- */
+.pager-numeral{
+	font-family: 'tempelhofMedium', Helvetica, sans-serif;
+	color: #333;
+}
+
+	.pager-numeral{
+		float: left;
+		text-align: center;
+	}
+
+	.pager-numeral,
+	.pager-numeral a{
+		height: 16px;
+		line-height: 16px;
+	}
+
+
+	/* pager links */
+	.pager-numeral a{ border-right: 1px solid #999;}
+
+	.pager-numeral a,
+	.pager-numeral p{
+		display: block;
+		padding: 0 13px;
+	}
+
+		.pager-numeral p span{
+			padding-right: 0.5em;
+			font-family: 'tempelhofRegular', Helvetica, sans-serif;
+		}
+
+		.pager-numeral a:hover,
+		.pager-numeral .pager-active{ color: #f8b317;}
