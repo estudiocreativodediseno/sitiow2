@@ -171,7 +171,7 @@ class Publish extends CI_Controller {			/* Heredamos de la clase CI_Controller *
 		
 		$this->db->select("CAT_ENTRY_CONTENTS.name as publishName, CAT_ENTRY_CONTENTS.description as publishDescription, 
 							CAT_ENTRY_CONTENTS.permanently, CAT_ENTRY_CONTENTS.insertDate,
-							CAT_ENTRY_CONTENTS.updateDate, CAT_ENTRY_CONTENTS.dateEnd, CAT_ENTRY_CONTENTS.dateStart, CAT_DATA_TYPES.*, CAT_DATA_TYPE_SHOW_FORMS.showLike, 
+							CAT_ENTRY_CONTENTS.updateDate, CAT_ENTRY_CONTENTS.dateEnd, CAT_ENTRY_CONTENTS.dateStart, CAT_DATA_TYPES.*, CAT_DATA_TYPE_SHOW_FORMS.showLike, CAT_ENTRY_CONTENTS.entryStructuresId ,
 							DET_ENTRY_CONTENTS.data, DET_ENTRY_CONTENTS.id, DET_ENTRY_CONTENTS.entryContentsId , DET_ENTRY_CONTENTS.dataTypesId "); 
 		$this->db->from('CAT_ENTRY_CONTENTS');
 		$this->db->join('DET_ENTRY_CONTENTS', 'CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ', 'INNER');
@@ -184,6 +184,17 @@ class Publish extends CI_Controller {			/* Heredamos de la clase CI_Controller *
 		$output->data = array();
 		foreach ($rs_qry->result() as $row)
 			array_push($output->data,$row);
+		
+			
+		$this->db->select("	DET_ENTRY_STRUCTURE.entryStructuresId as parentSt, CAT_ENTRY_STRUCTURES.name,
+							CAT_ENTRY_STRUCTURES.entryStructuresId , CAT_ENTRY_STRUCTURES.description "); 
+		$this->db->from('CAT_ENTRY_STRUCTURES');
+		$this->db->join('DET_ENTRY_STRUCTURE', 'CAT_ENTRY_STRUCTURES.entryStructuresId  = DET_ENTRY_STRUCTURE.subEntryStructureId ', 'INNER');
+		$rs_qry = $this->db->where("DET_ENTRY_STRUCTURE.subEntryStructureId IS NOT NULL AND DET_ENTRY_STRUCTURE.entryStructuresId	= '".$output->publicacion->entryStructuresId."'  ")->get();
+		
+		$output->structures = array();
+		foreach ($rs_qry->result() as $row)
+			array_push($output->structures,$row);
 
 		$this->load->view('templates/headstemplate',$output);
 		$this->load->view('templates/header',$this->session->userdata);

@@ -39,6 +39,7 @@ $config['field_tag']							= '%fieldId%';
 $config['structure_tag']						= '%structureId%';
 $config['section_list_tag']						= '%sectionListId%';
 $config['section_tag']							= '%sectionId%';
+$config['publish_edit_section']					= '49';
 
 /*
 |--------------------------------------------------------------------------

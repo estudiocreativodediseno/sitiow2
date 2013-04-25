@@ -47,22 +47,43 @@ class ContentsPublished extends CI_Controller {			/* Heredamos de la clase CI_Co
   function showList($entryStrucutreId=''){
 		try{
 			$moduleData= array();
-			$rs_qry = $this->db->select('name, description, entryStructuresId')->from('CAT_ENTRY_STRUCTURES')->where("MD5(entryStructuresId) = '$entryStrucutreId'")->get();
+			$rs_qry = $this->db->select('name, description, entryStructuresId')->
+							from('CAT_ENTRY_STRUCTURES')->
+							where("MD5(entryStructuresId) = '$entryStrucutreId'")->get();
+							
 			if($rs_qry->num_rows()>0)
 				$moduleData =  $rs_qry->row(); 
+				
+			$this->db->flush_cache();
+			$ps = $this->input->get('ps');
+			$et = array(0=>'0');
+			if(isset($ps)){
+				$rs_qry = $this->db->select('DET_ENTRY_CONTENTS.entryContentsId')->
+								from('CAT_ENTRY_CONTENTS')->
+								join('DET_ENTRY_CONTENTS','CAT_ENTRY_CONTENTS.entryContentsId = DET_ENTRY_CONTENTS.entryContentsId','INNER')->
+								where("MD5(CAT_ENTRY_CONTENTS.entryStructuresId) = '$entryStrucutreId'")->
+								where("MD5(DET_ENTRY_CONTENTS.parentContentId) = '$ps'")->get();
+				//echo $this->db->last_query();
+				foreach ($rs_qry->result() as $row)
+					array_push($et,"'".$row->entryContentsId."'");
+				//print_r($et);
+			}
 				
 			$crud = new grocery_CRUD();				/* Creamos el objeto */
 			$crud->set_theme('flexigrid');			/* Seleccionamos el tema */
 			//$crud->set_theme('datatables');			/* Seleccionamos el tema */
 			$crud->set_table('CAT_ENTRY_CONTENTS');		/* Seleccionmos el nombre de la tabla de nuestra base de datos*/
-			$crud->where('entryStructuresId',$moduleData->entryStructuresId);		
+			if(strlen($ps)>0){
+					$crud->where("entryContentsId` IN (".implode(',',$et).")");		
+			}else
+				$crud->where('entryStructuresId',$moduleData->entryStructuresId);		
 			$crud->set_subject('Publicación de '.(isset($moduleData->name)?$moduleData->name:''));	
 			$crud->set_language('spanish');			/* Asignamos el idioma español */
 		
 			
 			/* Campos del modelo */
 			$crud->fields(
-				'entryStructuresId',
+				'parentContent',
 			  	'name',
 			  	'description',
 			  	'active',
@@ -82,7 +103,6 @@ class ContentsPublished extends CI_Controller {			/* Heredamos de la clase CI_Co
 			
 			/* Campos a mostrar */
 			$crud->columns(
-				'entryStructuresId',
 			  	'name',
 			  	'description',
 			  	'datas',
@@ -95,6 +115,7 @@ class ContentsPublished extends CI_Controller {			/* Heredamos de la clase CI_Co
 			  	'updateDate',
 			  	'updateUserId',
 			  	'operations')        
+			->display_as('parentContent','Pertenece a')
 			->display_as('entryStructuresId','Tipo de publicación')
 			->display_as('name','Título')
 			->display_as('description','Notas')
@@ -117,7 +138,9 @@ class ContentsPublished extends CI_Controller {			/* Heredamos de la clase CI_Co
 		    $crud->field_type('updateDate', 'hidden', date('Y-m-d H:m:s'));
 		    $crud->field_type('insertDate', 'hidden', date('Y-m-d H:m:s'));
 			
-			
+			$crud->set_relation_n_n('parentContent','DET_ENTRY_CONTENTS','CAT_ENTRY_CONTENTS','entryContentsId','parentContentId','name');
+			//,null, 'DET_ENTRY_CONTENTS.parentContentId IS NOT NULL');
+
 			// Validación de campos
 			$crud->set_rules('name', 'Título', 'trim|min_length[3]|max_length[120]|xss_clean');
 	

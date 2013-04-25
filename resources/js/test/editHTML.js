@@ -228,3 +228,22 @@
 			createGrowl('Comando agregado', '   ', false);
 			
 	}
+	
+	
+	
+	function generateShortcutCode(){
+			$("#shortcutCode").val("");
+			if($('#cmbStructureId').val().length==0 && $('#isStructure').val()==1){
+				alert("Seleccione la estructura a insertar");
+				return;
+			}
+			
+			$($( "#sc-line-codes input" ).get().reverse()).each(function( index ) {
+				var line 	=	$(this).val().replace('%structureId%',$('#cmbStructureId').val()); 
+				line 		=	line.replace("%fieldId%",$('#cmbDataType').val()); 
+				line 		=	'\n'+line.replace("%sectionId%",$('#cmbStructureId').val()); 
+				$("#shortcutCodeArea").val(line+$("#shortcutCodeArea").val());
+			});		
+			
+			
+	}

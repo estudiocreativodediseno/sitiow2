@@ -47,6 +47,9 @@
                 <input type="hidden" id="shortcutCode" 	name="shortcutCode" value="<?php echo $isField; ?>"/>
                 
                 <input type="button" value="Agregar" class="action-btn default-btn" onclick="addShortcutCode();"/>
+                <input type="button" value="Generar" class="action-btn default-btn" onclick="generateShortcutCode();"/>
+                
+                <textarea id="shortcutCodeArea" cols="80" rows="8"></textarea>
                 
 
 

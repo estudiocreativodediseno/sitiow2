@@ -25,3 +25,9 @@ function saveDataForm(){
 	);
 		
 }
+
+$(document).ready(function() {
+	$("#btnSave").click(function() {
+		$("#editFormData").submit();
+	});	
+});

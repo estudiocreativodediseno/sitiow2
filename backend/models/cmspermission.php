@@ -173,7 +173,7 @@ class CmsPermission extends CI_Model {
 		$result = ($parentStructure==null?'<ul>':'
 					<ul>
 						<li>
-							<a href="'.base_url().strtolower('admin.php/cms/content/ContentsPublished/showList/').md5($realParentStructure).'?mod='.md5(49).'">Editar</a>
+							<a href="'.base_url().strtolower('admin.php/cms/content/ContentsPublished/showList/').md5($realParentStructure).'?mod='.md5($this->config->item('publish_edit_section')).'">Editar</a>
 						</li>
 						');
 		$aux = ''; $cnt = 0;
@@ -185,7 +185,7 @@ class CmsPermission extends CI_Model {
 			if($aux != $row->entryStructuresId){
 				$result .= '
 													<li>
-														<a href="'.base_url().strtolower('admin.php/cms/content/ContentsPublished/showList/').md5($row->entryStructuresId).'?mod='.md5(49).'" 
+														<a href="'.base_url().strtolower('admin.php/cms/content/ContentsPublished/showList/').md5($row->entryStructuresId).'?mod='.md5($this->config->item('publish_edit_section')).'" 
 																alt="'.$row->description.'" title="'.$row->description.'">'.$row->name.'</a>
 														';
 				if($row->subEntryStructureId>'0')

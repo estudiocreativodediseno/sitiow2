@@ -41,8 +41,8 @@
 //$route['default_controller'] = "welcome";
 //$route['default_controller'] = "usuarios";
 //$route['accesos/usurios/:any'] = "accesos/usuarios/$1";
-$route['default_controller'] = "login";
 
+$route['default_controller'] = "login";
 $route['404_override'] = 'menu/main';
 
 

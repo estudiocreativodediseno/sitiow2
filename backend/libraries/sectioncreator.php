@@ -620,6 +620,7 @@
 			return $code;
 		}
 		
+		
 		/*************************************************************************************
 			 total-pages
 		**************************************************************************************/
@@ -711,18 +712,24 @@
 
 		/*  find-elements: View Code Generator */
 		function get_findelements_view_code($statement){
-			
+						   
 			$posStart 	= strpos($statement,'name=')+strlen('name=')+1;
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
-			$name	= substr($statement, $posStart, $posEnd-$posStart);
+			$name 		= substr($statement, $posStart, $posEnd-$posStart);
 			
 			$posStart 	= strpos($statement,'maxElements=')+strlen('maxElements=')+1;
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
 			$maxElements= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'rowsPerPage=')+strlen('rowsPerPage=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$rowsPerPage= substr($statement, $posStart, $posEnd-$posStart);
 			
 			$posStart 	= strpos($statement,'structureId=')+strlen('structureId=')+1;
 			$posSpace	= strpos($statement,' ',$posStart);
@@ -734,25 +741,130 @@
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
-			$whereFieldId= substr($statement, $posStart, $posEnd-$posStart);
+			$whereFieldId 	= substr($statement, $posStart, $posEnd-$posStart);
 			
 			$posStart 	= strpos($statement,'condition=')+strlen('condition=')+1;
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
-			$condition	= substr($statement, $posStart, $posEnd-$posStart);
+			$condition 	= substr($statement, $posStart, $posEnd-$posStart);
 			
-			$posStart 	= strpos($statement,str_replace("%","",$this->CI->config->item('section_tag')).'=')
-										+strlen(str_replace("%","",$this->CI->config->item('section_tag')).'=')+1;
+			$posStart 	= strpos($statement,'value=')+strlen('value=')+1;
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
-			$section 	= substr($statement, $posStart, $posEnd-$posStart);
+			$value 		= substr($statement, $posStart, $posEnd-$posStart);
+
+			$rs = $this->CI->db->select('dataTypesId,entryStructuresId')->
+						from('DET_ENTRY_STRUCTURE')->
+						where('MD5(entryStructuresId)',$structureId)->
+						where('MD5(dataTypesId)',$whereFieldId)->get();
+			$row = $rs->row();
+			$field = $row->dataTypesId;
 			
 			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
 						from('CAT_ENTRY_STRUCTURES')->
 						where('MD5(entryStructuresId)',$structureId)->get();
 			$row = $rs->row();
+			
+			return '<?php /*Find*/ foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
+		}
+		
+		/*  find-elements: index Function */
+		function get_findelements_controller_index_code($statement){
+		
+			$posStart 	= strpos($statement,'name=')+strlen('name=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$name 		= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'maxElements=')+strlen('maxElements=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$maxElements= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'rowsPerPage=')+strlen('rowsPerPage=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$rowsPerPage= substr($statement, $posStart, $posEnd-$posStart);
+			$rowsPerPage = strlen($rowsPerPage)==0?0:$rowsPerPage;
+			
+			$posStart 	= strpos($statement,'structureId=')+strlen('structureId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$structureId= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'whereFieldId=')+strlen('whereFieldId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$whereFieldId 	= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'condition=')+strlen('condition=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$condition 	= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$posStart 	= strpos($statement,'value=')+strlen('value=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$value 		= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
+						from('CAT_ENTRY_STRUCTURES')->
+						where('MD5(entryStructuresId)',$structureId)->get();
+			$row = $rs->row();
+			
+			$condition = (strlen($value)*strlen($condition)*strlen($whereFieldId))?'					
+						$this->db->where("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+						':'';
+
+			return $code = '
+						$rs_contents = $this->db->select(\'CAT_ENTRY_CONTENTS.*\')->
+										from(\'CAT_ENTRY_CONTENTS\')->
+										where(\'MD5(entryStructuresId)\',\''.$structureId.'\')->get();
+						
+						$this->db->flush_cache();
+						$output->'.$this->toCamelString($row->name).'_elements = array();
+						$cnt = 0;
+						foreach ($rs_contents->result() as $row){
+							$cnt++;
+							$this->db->select("DET_ENTRY_CONTENTS.data, CAT_DATA_TYPES.dataTypesId, CAT_DATA_TYPES.prefix, CAT_DATA_TYPES.postfix"); 
+							$this->db->from("CAT_ENTRY_CONTENTS");
+							$this->db->join("DET_ENTRY_CONTENTS", "CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ", "INNER");
+							$this->db->join("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+							$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = \'".md5($row->entryContentsId)."\'  ")->get();
+
+							$dataRow = array();
+							foreach ($rs_qry->result() as $rowData)
+								$dataRow[MD5($rowData->dataTypesId)] = array(
+																"data"=>$rowData->prefix.$rowData->data.$rowData->postfix,
+																"dataTypeId"=>$rowData->dataTypesId);
+							
+							$dataRow["entryContentsId"] = $row->entryContentsId;
+							array_push($output->'.$this->toCamelString($row->name).'_elements,$dataRow);
+						}
+						$perPage 	= '.$rowsPerPage.';
+						$output->'.$this->toCamelString($row->name).'_actual_page = $actualPage = $this->ACTUAL_PAGE;
+						$actualPage--;
+						if($perPage>0){
+							$output->'.$this->toCamelString($row->name).'_total_pages = ($cnt-($cnt%$perPage))/$perPage + ($cnt%$perPage>0?1:0);
+							if($actualPage*$perPage >= $cnt)
+								$output->'.$this->toCamelString($row->name).'_elements = array_slice($output->'.$this->toCamelString($row->name).'_elements, ($actualPage-1)*$perPage,$cnt%$perPage);   
+							else
+								$output->'.$this->toCamelString($row->name).'_elements = array_slice($output->'.$this->toCamelString($row->name).'_elements, ($actualPage-1)*$perPage,$perPage);   
+						}else
+							$output->'.$this->toCamelString($row->name).'_total_pages = 1;
+						
+						$output->'.$this->toCamelString($row->name).'_total_results = $cnt;
+			';
+			
 			$code = '
 						$this->db->select("*"); 
 						$this->db->from("CAT_ENTRY_CONTENTS");
@@ -768,43 +880,18 @@
 			$code .= '
 						$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = \'".MD5($valueId)."\'  ")->get();
 			';
-			return '<?php foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
+			return '';
+	
 		}
 		
-		/*  find-elements: index Function */
-		function get_findelements_controller_index_code($statement){
-			
-			$posStart 	= strpos($statement,str_replace("%","",$this->CI->config->item('section_tag').'='))+
-								strlen(str_replace("%","",$this->CI->config->item('section_tag')).'=')+1;
-			$posSpace	= strpos($statement,' ',$posStart);
-			$posEnd	 	= strpos($statement,'%',2);
-			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
-			$section 	= substr($statement, $posStart, $posEnd-$posStart);
-			
-			$rs = $this->CI->db->select('CAT_SECTIONS.*')->
-						from('CAT_SECTIONS')->
-						where('MD5(sectionsId)',$section)->get();
-			$row = $rs->row();
-
-			$structure 	= substr($statement, $posStart, $posEnd-$posStart);
-			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
-						from('CAT_ENTRY_STRUCTURES')->
-						where('MD5(entryStructuresId)',$structure)->get();
-			$row = $rs->row();
-			return '<?php foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
 		
-
-			return '<?php echo substr(base_url(),0,strlen(base_url())-1).$urlSections["'.$section.'"]."'.$parameters.'"; ?>';
-		
-			return '
-
-					$rs = $this->db->select(\'url\')->
-								from(\'CAT_SECTIONS\')->
-								where(\'MD5(CAT_SECTIONS.sectionsId)\',\''.$section.'\')->get();
-					$row =$rs->row();
-					$output->urlSections[\''.$section.'\'] = $row->url;
-					
-					';
+		/*************************************************************************************
+			 end-find-elements
+		**************************************************************************************/
+			
+		/*  end-find-elements: View Code Generator */
+		function get_endfindelements_view_code($statement){
+			return '<?php endforeach; ?>';
 		}
 		
 		

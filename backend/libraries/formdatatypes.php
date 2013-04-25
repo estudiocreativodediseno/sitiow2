@@ -63,7 +63,7 @@
 		public function getFormElement($entryContentId, $dataTypeId, $excludeUpload=false, $onlyUpload=false){
 			$rs_qry = $this->CI->db->
 					select('CAT_DATA_TYPE_SHOW_FORMS.*, CAT_DATA_TYPES.name as nameField,  CAT_DATA_TYPES.prefix, CAT_DATA_TYPES.postfix, DET_ENTRY_CONTENTS.id as dataId,
-							CAT_DATA_TYPES.description as descriptionField, CAT_DATA_TYPES.displayName as displayNameField, CAT_DATA_TYPES.label as labelField,
+							CAT_DATA_TYPE_SHOW_FORMS.description as descriptionField, CAT_DATA_TYPES.displayName as displayNameField, CAT_DATA_TYPES.label as labelField,
 							CAT_DATA_TYPES.minLength, CAT_DATA_TYPES.maxLength, CAT_DATA_TYPES.mandatory, CAT_DATA_TYPES.uploadFileTypes, DET_ENTRY_CONTENTS.data,
 							DET_ENTRY_CONTENTS.updateDate')->
 					from('DET_ENTRY_CONTENTS')->
@@ -75,6 +75,7 @@
 				$row = $rs_qry->row();
 				$field_info->dataId		= $row->dataId;
 				$field_info->data 		= $row->data;
+				$field_info->description= $row->description;
 				$field_info->data_type 	= $row->showLike;
 				$field_info->name	 	= $row->nameField;
 				$field_info->prefix 	= $row->prefix;
@@ -865,7 +866,7 @@
 									</div>
 								</div>
 									
-								<span class="helper"></span>
+								<span class="helper" id="tooltip" alt="'.$field_info->description.'"></span>
 							</fieldset>
 							<iframe id="upload_target" name="upload_target" src="#" class="hidden" ></iframe>
 						</form>

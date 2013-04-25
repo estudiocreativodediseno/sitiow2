@@ -17,7 +17,7 @@ class Tendencias extends CI_Controller {
     
 
   	/**
-     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-17 09:16:49]
+     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-22 09:15:47]
 	 * Tendencias - Tendecncias de la tienda
 	 *
 	 * @return void
@@ -81,6 +81,141 @@ class Tendencias extends CI_Controller {
 					$output->urlSections['9bf31c7ff062936a96d3c8bd1f8f2ff3'] = $row->url;
 					
 					
+					/*Código generado automáticamente para la instrucción: findelements*/
+			  
+						$rs_contents = $this->db->select('CAT_ENTRY_CONTENTS.*')->
+										from('CAT_ENTRY_CONTENTS')->
+										where('MD5(entryStructuresId)','3c59dc048e8850243be8079a5c74d079')->get();
+						
+						$this->db->flush_cache();
+						$output->tendencias_elements = array();
+						$cnt = 0;
+						foreach ($rs_contents->result() as $row){
+							$cnt++;
+							$this->db->select("DET_ENTRY_CONTENTS.data, CAT_DATA_TYPES.dataTypesId, CAT_DATA_TYPES.prefix, CAT_DATA_TYPES.postfix"); 
+							$this->db->from("CAT_ENTRY_CONTENTS");
+							$this->db->join("DET_ENTRY_CONTENTS", "CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ", "INNER");
+							$this->db->join("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+							$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = '".md5($row->entryContentsId)."'  ")->get();
+
+							$dataRow = array();
+							foreach ($rs_qry->result() as $rowData)
+								$dataRow[MD5($rowData->dataTypesId)] = array(
+																"data"=>$rowData->prefix.$rowData->data.$rowData->postfix,
+																"dataTypeId"=>$rowData->dataTypesId);
+							
+							$dataRow["entryContentsId"] = $row->entryContentsId;
+							array_push($output->tendencias_elements,$dataRow);
+						}
+						$perPage 	= 0;
+						$output->tendencias_actual_page = $actualPage = $this->ACTUAL_PAGE;
+						$actualPage--;
+						if($perPage>0){
+							$output->tendencias_total_pages = ($cnt-($cnt%$perPage))/$perPage + ($cnt%$perPage>0?1:0);
+							if($actualPage*$perPage >= $cnt)
+								$output->tendencias_elements = array_slice($output->tendencias_elements, ($actualPage-1)*$perPage,$cnt%$perPage);   
+							else
+								$output->tendencias_elements = array_slice($output->tendencias_elements, ($actualPage-1)*$perPage,$perPage);   
+						}else
+							$output->tendencias_total_pages = 1;
+						
+						$output->tendencias_total_results = $cnt;
+			
+					/*Código generado automáticamente para la instrucción: element*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+									$fieldTags["escaparate"] = "f457c545a9ded88f18ecee47145a72c0";
+  /*No se reconoce la instrucción: endfindelements*/
+			
+					/*Código generado automáticamente para la instrucción: findelements*/
+			  
+						$rs_contents = $this->db->select('CAT_ENTRY_CONTENTS.*')->
+										from('CAT_ENTRY_CONTENTS')->
+										where('MD5(entryStructuresId)','3c59dc048e8850243be8079a5c74d079')->get();
+						
+						$this->db->flush_cache();
+						$output->tendencias_elements = array();
+						$cnt = 0;
+						foreach ($rs_contents->result() as $row){
+							$cnt++;
+							$this->db->select("DET_ENTRY_CONTENTS.data, CAT_DATA_TYPES.dataTypesId, CAT_DATA_TYPES.prefix, CAT_DATA_TYPES.postfix"); 
+							$this->db->from("CAT_ENTRY_CONTENTS");
+							$this->db->join("DET_ENTRY_CONTENTS", "CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ", "INNER");
+							$this->db->join("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+							$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = '".md5($row->entryContentsId)."'  ")->get();
+
+							$dataRow = array();
+							foreach ($rs_qry->result() as $rowData)
+								$dataRow[MD5($rowData->dataTypesId)] = array(
+																"data"=>$rowData->prefix.$rowData->data.$rowData->postfix,
+																"dataTypeId"=>$rowData->dataTypesId);
+							
+							$dataRow["entryContentsId"] = $row->entryContentsId;
+							array_push($output->tendencias_elements,$dataRow);
+						}
+						$perPage 	= 0;
+						$output->tendencias_actual_page = $actualPage = $this->ACTUAL_PAGE;
+						$actualPage--;
+						if($perPage>0){
+							$output->tendencias_total_pages = ($cnt-($cnt%$perPage))/$perPage + ($cnt%$perPage>0?1:0);
+							if($actualPage*$perPage >= $cnt)
+								$output->tendencias_elements = array_slice($output->tendencias_elements, ($actualPage-1)*$perPage,$cnt%$perPage);   
+							else
+								$output->tendencias_elements = array_slice($output->tendencias_elements, ($actualPage-1)*$perPage,$perPage);   
+						}else
+							$output->tendencias_total_pages = 1;
+						
+						$output->tendencias_total_results = $cnt;
+			
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["fieldName"] = "c0c7c76d30bd3dcaefc96f40275bdc0a";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["conc_sub1"] = "2838023a778dfaecdc212708f721b788";
+						$fieldTags["conc_sub2"] = "9a1158154dfa42caddbd0694a4e9bdc8";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["conc_desc1"] = "d82c8d1619ad8176d665453cfb2e55f0";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["conc_desc2"] = "a684eceee76fc522773286a895bc8436";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["col_titulo"] = "b53b3a3d6ab90ce0268229151c9bde11";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["col_sub1"] = "9f61408e3afb633e50cdf1b20de6f466";
+						$fieldTags["col_sub2"] = "72b32a1f754ba1c09b3695e0cb6cde7f";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["col_desc1"] = "66f041e16a60928b05a7e228a89c3799";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["col_desc2"] = "093f65e080a295f8076b1c5722a46aa2";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["sig_titulo"] = "072b030ba126b2f4b2374f342be9ed44";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["sig_sub1"] = "7f39f8317fbdb1988ef4c628eba02591";
+						$fieldTags["sig_sub2"] = "44f683a84163b3523afe57c2e008bc8c";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["sig_desc1"] = "03afdbd66e7929b125f8597834fa83a4";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  						$fieldTags["sig_desc2"] = "ea5d2f1c4608232e07d3aa3d998e5135";
+
+					/*Código generado automáticamente para la instrucción: element*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+									$fieldTags["banner"] = "fc490ca45c00b1249bbe3554a4fdf6fb";
+  /*No se reconoce la instrucción: endfindelements*/
+			
         	//termina function_index_code
 	
 			$output->fieldTags = $fieldTags;
@@ -110,6 +245,29 @@ class Tendencias extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
 			
         	//termina function_id_code
 	
@@ -158,6 +316,29 @@ class Tendencias extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
 			
         	//termina function_find_code
 	
@@ -195,6 +376,29 @@ class Tendencias extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
+			  /*No se reconoce la instrucción: findelements*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: urluploadsfolder*/
+			/*No se reconoce la instrucción: element*/
+			  /*No se reconoce la instrucción: endfindelements*/
 			
         	//termina function_like_code
 	

@@ -54,21 +54,18 @@
                                                 <div class="edit-form-title data-information data">
                                                     <?php echo $element; ?>
                                                 </div>
-                                                <div id ="tooltip" alt="<?php echo $row->description; ?>">
-                                                    <img src="<?php echo base_url(); ?>images/icons/info.png" />
-                                                </div>
+                                                
                                             </div>	
                                 <?php
                                         }
                                     }
                                 ?>                                
-                            </div>
                                 
 							<?php  
 									//$attributes = array('class' => '', 'id' => 'editFormData', 'action' => 'nothing');
 									//echo form_open('javascript',$attributes); 
 							?>  
-                            <form id="editFormData" name="editFormData" class="clearfix" method="post" class="" action="javascript:void(0);">
+                            <form id="editFormData" name="editFormData" class="clearfix" method="post" action="javascript:void(0);">
                                 
 
                                 <div class="edit-form-data">
@@ -96,20 +93,30 @@
                                     <?php
                                     		}
                                     	}
-                                    ?>                                
+                                    ?>             
+                                    
+                                    
+                                    <ul class="controller nav-bar clearfix">
+                                        <?php foreach($structures as $st): ?>
+                                            <li  id ="tooltip" alt="<?php echo $st	->description; ?>">
+                                            	<a href="<?php echo base_url().'admin.php/cms/content/contentspublished/showlist/'.md5($st->entryStructuresId).'?mod='.md5($this->config->item('publish_edit_section')).'&ps='.md5($row->entryContentsId); ?>" class="txt-btn"><?php echo $st->name; ?></a>&nbsp;&nbsp;&nbsp;|
+                                            </li>
+                                        <?php endforeach; ?>
+                                    </ul>                   
                                 </div>
                                 
                                 <ul class="controller nav-bar clearfix">
-                                    <li><a href="#" class="action-btn save-btn">Guardar</a></li>
+                                    <li><a href="#" class="action-btn save-btn" id="btnSave">Guardar</a></li>
                                     <li><a href="#" class="action-btn cancel-btn">Cancelar</a></li>
-                                    <li><a href="#" class="action-btn default-btn">Sample Button</a></li>
                                 </ul>
                                 
                                 <div id="edit-buttons-area">
-                                	<input class="button"  type="button" value="Cancelar" />
-                                	<input class="button"  type="submit" value="Guardar" />
+                                
                                     <!--
-                                	<a class="button" href="#click" type="submit" onclick="saveDataForm();">Guardar</a>
+
+                                	<input class="action-btn save-btn"  type="button" value="Cancelar" />
+                                	<input class="button"  type="submit" value="Guardar" />                                	
+                                    <a class="button" href="#click" type="submit" onclick="saveDataForm();">Guardar</a>
                                 	<a class="button" href="#click" type="submit" onclick="validateForm();">Validar</a>
                                 	<a class="button" href="#click" onclick="">Cancelar</a>
                                     -->
