@@ -10,7 +10,9 @@
                                 <li><span class="user-name">Bienvenido</span> <?php echo $name; ?> (<?php echo $username; ?>)</li>
                                 <li><a href="<?php echo base_url(); ?>admin.php/login/logout" class="cms-btn sprite exit-btn">Salir</a></li>
                             </ul>
-                            <div class="brand"></div>
+                            <div class="brand">
+                            	<img src="<?php echo base_url(); ?>/resources/img/ui/header-bg.png" alt="" />
+                            </div>
     
                         </div>
     
