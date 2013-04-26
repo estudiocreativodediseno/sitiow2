@@ -17,7 +17,7 @@ class Detalle extends CI_Controller {
     
 
   	/**
-     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-17 09:18:18]
+     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-26 10:50:34]
 	 * Detalle Producto - Detalles del producto
 	 *
 	 * @return void
@@ -101,8 +101,37 @@ class Detalle extends CI_Controller {
 					$output->urlSections['9bf31c7ff062936a96d3c8bd1f8f2ff3'] = $row->url;
 					
 					  /*No se reconoce la instrucción: urlresourcesfolder*/
-			  /*No se reconoce la instrucción: urlresourcesfolder*/
-			  /*No se reconoce la instrucción: urlresourcesfolder*/
+			
+					/*Código generado automáticamente para la instrucción: insertlibrary*/
+			  
+
+					$rs = $this->db->select('CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path')->
+								from('CAT_LIBRARIES')->
+								join('CAT_LIBRARY_TYPES','CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId','INNER')->
+								where('MD5(CAT_LIBRARIES.librariesId)','3c59dc048e8850243be8079a5c74d079')->get();
+
+					foreach($rs->result() as $row):
+						if($row->extensionFile == 'css')
+							$output->library['3c59dc048e8850243be8079a5c74d079'] = '<link rel="stylesheet" type="text/css" href="'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.'" />';
+						else if($row->extensionFile == 'js')
+							$output->library['3c59dc048e8850243be8079a5c74d079'] = '<script type="text/javascript" src="'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.'"></script>';
+		
+					endforeach;
+					/*Código generado automáticamente para la instrucción: insertlibrary*/
+			  
+
+					$rs = $this->db->select('CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path')->
+								from('CAT_LIBRARIES')->
+								join('CAT_LIBRARY_TYPES','CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId','INNER')->
+								where('MD5(CAT_LIBRARIES.librariesId)','37693cfc748049e45d87b8c7d8b9aacd')->get();
+
+					foreach($rs->result() as $row):
+						if($row->extensionFile == 'css')
+							$output->library['37693cfc748049e45d87b8c7d8b9aacd'] = '<link rel="stylesheet" type="text/css" href="'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.'" />';
+						else if($row->extensionFile == 'js')
+							$output->library['37693cfc748049e45d87b8c7d8b9aacd'] = '<script type="text/javascript" src="'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.'"></script>';
+		
+					endforeach;  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
@@ -168,7 +197,8 @@ class Detalle extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
-			  /*No se reconoce la instrucción: urlresourcesfolder*/
+			  /*No se reconoce la instrucción: insertlibrary*/
+			  /*No se reconoce la instrucción: insertlibrary*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
@@ -253,7 +283,8 @@ class Detalle extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
-			  /*No se reconoce la instrucción: urlresourcesfolder*/
+			  /*No se reconoce la instrucción: insertlibrary*/
+			  /*No se reconoce la instrucción: insertlibrary*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
@@ -327,7 +358,8 @@ class Detalle extends CI_Controller {
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlsection*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
-			  /*No se reconoce la instrucción: urlresourcesfolder*/
+			  /*No se reconoce la instrucción: insertlibrary*/
+			  /*No se reconoce la instrucción: insertlibrary*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/
 			  /*No se reconoce la instrucción: urlresourcesfolder*/

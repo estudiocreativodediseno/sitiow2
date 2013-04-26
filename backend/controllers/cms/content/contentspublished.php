@@ -84,6 +84,7 @@ class ContentsPublished extends CI_Controller {			/* Heredamos de la clase CI_Co
 			/* Campos del modelo */
 			$crud->fields(
 				'parentContent',
+				'entryStructuresId',
 			  	'name',
 			  	'description',
 			  	'active',

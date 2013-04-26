@@ -38,6 +38,7 @@ $config['template_generators_folder']			= 'backend/views/templates/generators/';
 $config['field_tag']							= '%fieldId%';
 $config['structure_tag']						= '%structureId%';
 $config['section_list_tag']						= '%sectionListId%';
+$config['library_tag']							= '%libraryId%';
 $config['section_tag']							= '%sectionId%';
 $config['publish_edit_section']					= '49';
 

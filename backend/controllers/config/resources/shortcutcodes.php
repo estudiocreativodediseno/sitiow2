@@ -62,6 +62,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'isField',
 			  	'isMenuSection',
 			  	'isSection',
+			  	'isLibrary',
 			  	'insertDate',
 			  	'updateDate',
 			  	'insertUserId',
@@ -75,6 +76,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'isField',
 			  	'isSection',
 			  	'isMenuSection',
+			  	'isLibrary',
 			  	'order',
 			  	'active');
 			
@@ -89,6 +91,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'isField',
 			  	'isMenuSection',
 			  	'isSection',
+			  	'isLibrary',
 			  	'insertDate',
 			  	'insertUserId',
 			  	'updateDate',
@@ -101,6 +104,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			->display_as('isField','Aplica a Campo')
 			->display_as('isMenuSection','Aplica a Lista de Secciones')
 			->display_as('isSection','Aplica a Sección')
+			->display_as('isLibrary','Aplica a Librería')
 			->display_as('description','Descripción')
 			->display_as('insertDate','Fecha Creación')
 			->display_as('insertUserId','Usuario')
@@ -194,8 +198,9 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 		return '<textarea name="code" id="field-code">'.$value.'</textarea><br>
 					Usar <font color=green><code>'.$this->config->item('structure_tag').'</code></font> para llenado automático de Estructura<br>
 					Usar <font color=green><code>'.$this->config->item('field_tag').'</code></font> para llenado automático de Campo<br>
-					Usar <font color=green><code>'.$this->config->item('section_list_tag').'</code></font> para llenado automático de Lista de secciones
-					Usar <font color=green><code>'.$this->config->item('section_tag').'</code></font> para llenado automático de Section';
+					Usar <font color=green><code>'.$this->config->item('section_list_tag').'</code></font> para llenado automático de Lista de secciones<br>
+					Usar <font color=green><code>'.$this->config->item('section_tag').'</code></font> para llenado automático de Sección<br>
+					Usar <font color=green><code>'.$this->config->item('library_tag').'</code></font> para llenado automático de Librería';
 	}
 	
 }

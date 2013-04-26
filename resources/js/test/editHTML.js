@@ -66,11 +66,26 @@
 	
 	}
 	
-	function addFunction(opt,isS,isF,isM, isSct){
+	function addFunction(opt,isS,isF,isM, isSct, isL){
 		
 		if(isSct > 0){
 			tiny = TINY.box.show({ 													
 				url:'../getSectionShortcut', 													
+				post:'shortcutId='+opt, 													
+				width:800, 													
+				height:600, 													
+				opacity:80, 													
+				topsplit:3,
+				openjs:function(){
+					$('.shortcut-pre').litelighter();
+				}								
+			});
+			return 0;
+		}
+		
+		if(isL > 0){
+			tiny = TINY.box.show({ 													
+				url:'../getLibraryShortcut', 													
 				post:'shortcutId='+opt, 													
 				width:800, 													
 				height:600, 													
@@ -221,6 +236,7 @@
 				var line 	=	$(this).val().replace('%structureId%',$('#cmbStructureId').val()); 
 				line 		=	line.replace("%fieldId%",$('#cmbDataType').val()); 
 				line 		=	line.replace("%sectionId%",$('#cmbStructureId').val()); 
+				line 		=	line.replace("%libraryId%",$('#cmbStructureId').val()); 
 				addDivs(line+'\n');
 			});		
 			
@@ -242,6 +258,7 @@
 				var line 	=	$(this).val().replace('%structureId%',$('#cmbStructureId').val()); 
 				line 		=	line.replace("%fieldId%",$('#cmbDataType').val()); 
 				line 		=	'\n'+line.replace("%sectionId%",$('#cmbStructureId').val()); 
+				line 		=	line.replace("%libraryId%",$('#cmbStructureId').val()); 
 				$("#shortcutCodeArea").val(line+$("#shortcutCodeArea").val());
 			});		
 			

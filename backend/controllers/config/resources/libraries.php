@@ -187,13 +187,13 @@ class Libraries extends CI_Controller {			/* Heredamos de la clase CI_Controller
 			->display_as('active','Activo');
 								
 			//Cuando se requiere que un campo es un ardhivo adjunto
-			$crud->set_field_upload('urlFile','uploads/files/resources/css');
+			$crud->set_field_upload('urlFile','uploads/files/resources/js');
 		
 			// Validación de campos
 			$crud->set_rules('name', 'Nombre', 'trim|min_length[3]|max_length[120]|xss_clean');
 			$crud->set_rules('description', 'Descripcion', 'trim|min_length[0]|max_length[120]|xss_clean');			
 	
-	    	$crud->add_action('Ver', base_url().'images/icons/menuedit.png', 'Config/Resources/Libraries/css/view');
+	    	$crud->add_action('Ver', base_url().'images/icons/menuedit.png', 'Config/Resources/Libraries/js/view');
 			//Callbacks
 				
 				

@@ -17,7 +17,7 @@ class Home extends CI_Controller {
     
 
   	/**
-     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-17 09:16:23]
+     * Código generado automáticamente por CMS-FRAMEWORK [2013-04-26 09:42:29]
 	 * Home - Home
 	 *
 	 * @return void

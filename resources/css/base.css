@@ -227,7 +227,9 @@ html,
 .comp-box,
 .component input[type="text"],
 .component input[type="password"],
-.component textarea{
+.component textarea,
+.login-form input[type="text"],
+.login-form input[type="password"]{
 	font-family: inherit;
 	font-size: inherit;
 

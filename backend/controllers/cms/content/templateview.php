@@ -70,7 +70,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 		$data->sectionId 	= $sectionId;
 
 
-		$rs = $this->db->select('name, description, class, shortcutsId, isStructure, isField,, isMenuSection, isSection, class')->
+		$rs = $this->db->select('name, description, class, shortcutsId, isStructure, isField,, isMenuSection, isSection, isLibrary, class')->
 					from('CAT_SHORTCUTS')->
 					where('active',1)->
 					order_by('class')->
@@ -84,6 +84,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 												'isStructure'	=>	$row->isStructure,
 												'isMenu'		=>	$row->isMenuSection,
 												'isSection'		=>	$row->isSection,
+												'isLibrary'		=>	$row->isLibrary,
 												'description'	=>	$row->description	));
 		
 		$data->output->css_files = $data->output->js_files = array();
@@ -215,7 +216,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 
 		$output->lines 			= explode("\n",$rowCode->code);
 		
-		$this->load->view('cms/content/viewmenushortcutdetails', $output);
+		$this->load->view('cms/content/shortcutdetails/viewmenushortcutdetails', $output);
 	}
 	
 	
@@ -242,7 +243,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 
 		$output->lines 			= explode("\n",$rowCode->code);
 		
-		$this->load->view('cms/content/viewsectionshortcutdetails', $output);
+		$this->load->view('cms/content/shortcutdetails/viewsectionshortcutdetails', $output);
 	}
 	
 	
@@ -268,7 +269,33 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 		$output->isStructure 	= $rowCode->isStructure;
 		$output->isField 		= $rowCode->isField;
 		
-		$this->load->view('cms/content/viewshortcutdetails', $output);
+		$this->load->view('cms/content/shortcutdetails/viewshortcutdetails', $output);
+	}
+	
+	
+	
+	function getLibraryShortcut(){
+		
+		$shortcutId = $this->input->post('shortcutId');
+		//$shortcutId = $this->input->get('s');
+		$rs = $this->db->select('code, isStructure, isField')->
+					from('CAT_SHORTCUTS')->
+					where('shortcutsId',$shortcutId)->get();
+		$rowCode 		= $rs->row();
+		
+		$rs = $this->db->select('CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.name, librariesId')->
+					from('CAT_LIBRARIES')->
+					join('CAT_LIBRARY_TYPES','CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId','INNER')->
+					order_by('CAT_LIBRARIES.libraryTypesId')->
+					where('CAT_LIBRARIES.ACTIVE',1)->get();
+		$output->libraries =  array();
+		foreach($rs->result() as $row)
+			array_push($output->libraries,array('librariesId'=>$row->librariesId,'displayName'=>$row->displayName,'type'=>$row->name));
+			
+
+		$output->lines 			= explode("\n",$rowCode->code);
+		
+		$this->load->view('cms/content/shortcutdetails/viewlibraryshortcutdetails', $output);
 	}
 	
 	

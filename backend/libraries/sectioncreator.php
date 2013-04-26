@@ -685,6 +685,7 @@
 			$posSpace	= strpos($statement,' ',$posStart);
 			$posEnd	 	= strpos($statement,'%',2);
 			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+
 			$section 	= substr($statement, $posStart, $posEnd-$posStart);
 			
 			$rs = $this->CI->db->select('CAT_SECTIONS.*')->
@@ -703,9 +704,7 @@
 					
 					';
 		}
-		
-		
-		
+			
 		/*************************************************************************************
 			 find-elements
 		**************************************************************************************/
@@ -899,7 +898,7 @@
 			 insert-libraries
 		**************************************************************************************/
 
-		/*  element: index Function */
+		/*  insert-libraries: index Function */
 		function get_insertlibraries_controller_index_code($statement){
 			
 			$rs = $this->CI->db->select('CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path')->
@@ -936,40 +935,61 @@
 					endforeach;';
 		}
 		
-		/*  element: View Code Generator */
+		/*  insert-libraries: View Code Generator */
 		function get_insertlibraries_view_code($statement){
+			
 			return '
 						<?php 		echo $libraries;	?>
 						';
-			$rs = $this->CI->db->select('CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path')->
-						from('CAT_SECTIONS')->
-						join('CAT_TEMPLATES','CAT_TEMPLATES.templatesId = CAT_SECTIONS.templatesId','INNER')->
-						join('DET_LIBRARIES_TEMPLATES','DET_LIBRARIES_TEMPLATES.templatesId = CAT_TEMPLATES.templatesId','INNER')->
-						join('CAT_LIBRARIES','CAT_LIBRARIES.librariesId = DET_LIBRARIES_TEMPLATES.librariesId','INNER')->
-						join('CAT_LIBRARY_TYPES','CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId','INNER')->
-						where('CAT_SECTIONS.sectionsId',$this->SECTION_ID)->
-						where('CAT_LIBRARIES.active',1)->
-						order_by('order')->get();
-			$libraries = '';
-			foreach($rs->result() as $row):
-				if($row->extensionFile == 'css')
-					$libraries .= '				<link rel="stylesheet" type="text/css" href="<?php echo substr(base_url(),0,strlen(base_url())-1); ?>'.$row->url_path.$row->urlFile.'" />
-';
-				else if($row->extensionFile == 'js')
-					$libraries .= '				<script type="text/javascript" src="<?php echo substr(base_url(),0,strlen(base_url())-1); ?>'.$row->url_path.$row->urlFile.'"></script>
-';
-
-
-				if($row->extensionFile == 'css')
-					$libraries .= '				<link rel="stylesheet" type="text/css" href="<?php echo substr(base_url(),0,strlen(base_url())-1); ?>'.$row->url_path.$row->urlFile.'" />
-';
-				else if($row->extensionFile == 'js')
-					$libraries .= '				<script type="text/javascript" src="<?php echo substr(base_url(),0,strlen(base_url())-1); ?>'.$row->url_path.$row->urlFile.'"></script>
-';
-
-			endforeach;
 			
-			return $libraries;
+		}
+		
+		
+		/*************************************************************************************
+			 insert-library
+		**************************************************************************************/
+
+		/*  insert-library: index Function */
+		function get_insertlibrary_controller_index_code($statement){
+			
+			$posStart 	= strpos($statement,'libraryId=')+strlen('libraryId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$libraryId 		= substr($statement, $posStart, $posEnd-$posStart);
+			
+			$rs = $this->CI->db->select('CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path')->
+								from('CAT_LIBRARIES')->
+								join('CAT_LIBRARY_TYPES','CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId','INNER')->
+								where('MD5(CAT_LIBRARIES.librariesId)',$libraryId)->get();
+
+
+			return '
+
+					$rs = $this->db->select(\'CAT_LIBRARIES.urlFile, CAT_LIBRARIES.displayName, CAT_LIBRARY_TYPES.extensionFile, CAT_LIBRARY_TYPES.url_path\')->
+								from(\'CAT_LIBRARIES\')->
+								join(\'CAT_LIBRARY_TYPES\',\'CAT_LIBRARY_TYPES.libraryTypesId = CAT_LIBRARIES.libraryTypesId\',\'INNER\')->
+								where(\'MD5(CAT_LIBRARIES.librariesId)\',\''.$libraryId.'\')->get();
+
+					foreach($rs->result() as $row):
+						if($row->extensionFile == \'css\')
+							$output->library[\''.$libraryId.'\'] = \'<link rel="stylesheet" type="text/css" href="\'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.\'" />\';
+						else if($row->extensionFile == \'js\')
+							$output->library[\''.$libraryId.'\'] = \'<script type="text/javascript" src="\'.substr(base_url(),0,strlen(base_url())-1).$row->url_path.$row->urlFile.\'"></script>\';
+		
+					endforeach;';
+		}
+		
+		/*  insert-library: View Code Generator */
+		function get_insertlibrary_view_code($statement){
+			
+			$posStart 	= strpos($statement,'libraryId=')+strlen('libraryId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$libraryId 		= substr($statement, $posStart, $posEnd-$posStart);
+			
+			return '<?php 		echo $library[\''.$libraryId.'\'];	?>';
 		}
 		
 		private function toCamelString($string){

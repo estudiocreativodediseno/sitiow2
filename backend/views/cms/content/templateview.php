@@ -85,7 +85,8 @@
                                                                                     '<?php echo $command['isStructure']; ?>',
                                                                                     '<?php echo $command['isField']; ?>',
                                                                                     '<?php echo $command['isMenu']; ?>',
-                                                                                    '<?php echo $command['isSection']; ?>')">
+                                                                                    '<?php echo $command['isSection']; ?>',
+                                                                                    '<?php echo $command['isLibrary']; ?>')">
                                                                 <?php echo $command['name']; ?></a>
                                               	</div>
                                             <?php } ?>        
