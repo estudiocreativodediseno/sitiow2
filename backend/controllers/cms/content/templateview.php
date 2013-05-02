@@ -70,7 +70,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 		$data->sectionId 	= $sectionId;
 
 
-		$rs = $this->db->select('name, description, class, shortcutsId, isStructure, isField,, isMenuSection, isSection, isLibrary, class')->
+		$rs = $this->db->select('name, description, class, shortcutsId, isStructure, isField, isSubStructure, isMenuSection, isSection, isLibrary, class')->
 					from('CAT_SHORTCUTS')->
 					where('active',1)->
 					order_by('class')->
@@ -82,6 +82,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 												'class'			=>	$row->class,
 												'isField'		=>	$row->isField,
 												'isStructure'	=>	$row->isStructure,
+												'isSubStructure'=>	$row->isSubStructure,
 												'isMenu'		=>	$row->isMenuSection,
 												'isSection'		=>	$row->isSection,
 												'isLibrary'		=>	$row->isLibrary,
@@ -252,7 +253,7 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 		
 		$shortcutId = $this->input->post('shortcutId');
 		//$shortcutId = $this->input->get('s');
-		$rs = $this->db->select('code, isStructure, isField')->
+		$rs = $this->db->select('code, isStructure, isField, isSubStructure')->
 					from('CAT_SHORTCUTS')->
 					where('shortcutsId',$shortcutId)->get();
 		$rowCode 		= $rs->row();
@@ -270,6 +271,31 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 		$output->isField 		= $rowCode->isField;
 		
 		$this->load->view('cms/content/shortcutdetails/viewshortcutdetails', $output);
+	}
+	
+	
+	function getSubShortcutInfo(){
+		
+		$shortcutId = $this->input->post('shortcutId');
+		//$shortcutId = $this->input->get('s');
+		$rs = $this->db->select('code, isStructure, isField')->
+					from('CAT_SHORTCUTS')->
+					where('shortcutsId',$shortcutId)->get();
+		$rowCode 		= $rs->row();
+		
+		$rs = $this->db->select('name, entryStructuresId')->
+					from('CAT_ENTRY_STRUCTURES')->
+					where('ACTIVE',1)->get();
+		$output->structures =  array();
+		foreach($rs->result() as $row)
+			array_push($output->structures,array('structuresId'=>$row->entryStructuresId,'name'=>$row->name));
+			
+
+		$output->lines 			= explode("\n",$rowCode->code);
+		$output->isStructure 	= $rowCode->isStructure;
+		$output->isField 		= $rowCode->isField;
+		
+		$this->load->view('cms/content/shortcutdetails/viewsubshortcutdetails', $output);
 	}
 	
 	
@@ -312,6 +338,25 @@ class TemplateView extends CI_Controller {			/* Heredamos de la clase CI_Control
 			array_push($output->structures,array('id'=>$row->dataTypesId,'name'=>$row->displayName));
 		echo json_encode($output->structures);
 	}
+		
+		
+		
+	function getSubStructures(){
+		echo 1;
+		$structureId = $this->input->post('structureId');
+		$rs = $this->db->select('MD5(CAT_ENTRY_STRUCTURES.entryStructuresId) as id, CAT_ENTRY_STRUCTURES.displayName')->
+					from('CAT_ENTRY_STRUCTURES')->
+					join('DET_ENTRY_STRUCTURE','DET_ENTRY_STRUCTURE.subEntryStructureId = CAT_ENTRY_STRUCTURES.entryStructuresId','INNER')->
+					where('MD5(DET_ENTRY_STRUCTURE.entryStructuresId)',$structureId)->
+					where('DET_ENTRY_STRUCTURE.subEntryStructureId IS NOT NULL')->
+					where('CAT_DATA_TYPES.active',1)->get();
+		
+		$output->structures =  array();
+		foreach($rs->result() as $row)
+			array_push($output->structures,array('id'=>$row->id,'name'=>$row->displayName));
+		echo json_encode($output->structures);
+	}
+		
 		
 		
 	

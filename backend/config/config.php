@@ -37,6 +37,7 @@ $config['frontend_versions_folder']				= 'frontendVersions/';
 $config['template_generators_folder']			= 'backend/views/templates/generators/';
 $config['field_tag']							= '%fieldId%';
 $config['structure_tag']						= '%structureId%';
+$config['substructure_tag']						= '%subStructureId%';
 $config['section_list_tag']						= '%sectionListId%';
 $config['library_tag']							= '%libraryId%';
 $config['section_tag']							= '%sectionId%';

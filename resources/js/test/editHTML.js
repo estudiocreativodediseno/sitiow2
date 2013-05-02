@@ -66,7 +66,7 @@
 	
 	}
 	
-	function addFunction(opt,isS,isF,isM, isSct, isL){
+	function addFunction(opt,isS, isSS,isF,isM, isSct, isL){
 		
 		if(isSct > 0){
 			tiny = TINY.box.show({ 													
@@ -93,6 +93,23 @@
 				topsplit:3,
 				openjs:function(){
 					$('.shortcut-pre').litelighter();
+				}								
+			});
+			return 0;
+		}
+		
+		if(isSS > 0){
+			tiny = TINY.box.show({ 													
+				url:'../getSubShortcutInfo', 													
+				post:'shortcutId='+opt, 													
+				width:800, 													
+				height:600, 													
+				opacity:80, 													
+				topsplit:3,
+				openjs:function(){
+					$("#cmbStructureId").change(function() {
+						getSubStructures();
+					});
 				}								
 			});
 			return 0;
@@ -209,6 +226,8 @@
 	}
 	
 	
+	
+	
 	function getDataTypes(){
 		var $subDataType = $("#cmbDataType");
 		$subDataType.empty();
@@ -220,6 +239,23 @@
 						var response = $.parseJSON(data);
 						for(var  i=0; i<response.length; i++)
 							$subDataType.append($('<option></option>').attr("value", response[i].id).text(response[i].name));
+						
+					}
+		);
+	}
+	
+	
+	function getSubStructures(){
+		var $subStructures = $("#cmbSubStructureId");
+		$subStructures.empty();
+	
+		
+		$.post($('#base-url').val()+"admin.php/Cms/Content/TemplateView/getSubStructures", 
+					{	'structureId': 	$("#cmbStructureId").val()	}, 
+					function(data){
+						var response = $.parseJSON(data);
+						for(var  i=0; i<response.length; i++)
+							$subStructures.append($('<option></option>').attr("value", response[i].id).text(response[i].name));
 						
 					}
 		);

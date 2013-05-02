@@ -83,6 +83,7 @@
                                                         <a href="#" class="framework-shortcut <?php echo $command['class']; ?>" 
                                                             onclick="addFunction(	'<?php echo $command['shortcutsId']; ?>',
                                                                                     '<?php echo $command['isStructure']; ?>',
+                                                                                    '<?php echo $command['isSubStructure']; ?>',
                                                                                     '<?php echo $command['isField']; ?>',
                                                                                     '<?php echo $command['isMenu']; ?>',
                                                                                     '<?php echo $command['isSection']; ?>',

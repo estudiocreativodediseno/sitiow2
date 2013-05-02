@@ -59,6 +59,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'active',
 			  	'code',
 			  	'isStructure',
+			  	'isSubstructure',
 			  	'isField',
 			  	'isMenuSection',
 			  	'isSection',
@@ -73,6 +74,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'name',
 			  	'description',
 			  	'isStructure',
+			  	'isSubstructure',
 			  	'isField',
 			  	'isSection',
 			  	'isMenuSection',
@@ -88,6 +90,7 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			  	'active',
 			  	'code',
 			  	'isStructure',
+			  	'isSubstructure',
 			  	'isField',
 			  	'isMenuSection',
 			  	'isSection',
@@ -100,7 +103,8 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 			->display_as('name','Nombre')
 			->display_as('order','Orden')
 			->display_as('code','Código')
-			->display_as('isStructure','Aplica a Estructure')
+			->display_as('isStructure','Aplica a Estructura')
+			->display_as('isSubstructure','Aplica a sub-estructura')
 			->display_as('isField','Aplica a Campo')
 			->display_as('isMenuSection','Aplica a Lista de Secciones')
 			->display_as('isSection','Aplica a Sección')
@@ -196,11 +200,12 @@ class ShortcutCodes extends CI_Controller {			/* Heredamos de la clase CI_Contro
 	function add_code_callback($value){
 		
 		return '<textarea name="code" id="field-code">'.$value.'</textarea><br>
-					Usar <font color=green><code>'.$this->config->item('structure_tag').'</code></font> para llenado automático de Estructura<br>
-					Usar <font color=green><code>'.$this->config->item('field_tag').'</code></font> para llenado automático de Campo<br>
-					Usar <font color=green><code>'.$this->config->item('section_list_tag').'</code></font> para llenado automático de Lista de secciones<br>
-					Usar <font color=green><code>'.$this->config->item('section_tag').'</code></font> para llenado automático de Sección<br>
-					Usar <font color=green><code>'.$this->config->item('library_tag').'</code></font> para llenado automático de Librería';
+					 <font color=green><code>'.$this->config->item('structure_tag').'</code></font> para llenado automático de Estructura<br>
+					 <font color=green><code>'.$this->config->item('substructure_tag').'</code></font> para llenado automático de sub-estructura<br>
+					 <font color=green><code>'.$this->config->item('field_tag').'</code></font> para llenado automático de Campo<br>
+					 <font color=green><code>'.$this->config->item('section_list_tag').'</code></font> para llenado automático de Lista de secciones<br>
+					 <font color=green><code>'.$this->config->item('section_tag').'</code></font> para llenado automático de Sección<br>
+					 <font color=green><code>'.$this->config->item('library_tag').'</code></font> para llenado automático de Librería';
 	}
 	
 }

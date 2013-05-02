@@ -379,6 +379,127 @@
 			return '<?php foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
 		}
 		
+		
+		
+		
+			
+			
+		/*************************************************************************************
+			 foreach-substructure-element
+		**************************************************************************************/
+			
+		/*	foreach-substructure-element: index Function	*/
+		function get_foreachsubstructureelement_controller_index_code($statement){
+			
+			
+			
+			$posStart 	= strpos($statement,'rowsPerPage=')+strlen('rowsPerPage=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			$perPage 	= is_numeric(substr($statement, $posStart, $posEnd-$posStart))?substr($statement, $posStart, $posEnd-$posStart):0;
+			
+			
+			$posStart 	= strpos($statement,'structureId=')+strlen('structureId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+					
+			$structure 	= substr($statement, $posStart, $posEnd-$posStart);
+			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
+						from('CAT_ENTRY_STRUCTURES')->
+						where('MD5(entryStructuresId)',$structure)->get();
+			$row = $rs->row();
+			
+			$code = '
+						$rs_contents = $this->db->select(\'CAT_ENTRY_CONTENTS.*\')->
+										from(\'CAT_ENTRY_CONTENTS\')->
+										where(\'MD5(entryStructuresId)\',\''.$structure.'\')->get();
+						
+						$this->db->flush_cache();
+						$output->'.$this->toCamelString($row->name).'_elements = array();
+						$cnt = 0;
+						foreach ($rs_contents->result() as $row){
+							$cnt++;
+							$this->db->select("DET_ENTRY_CONTENTS.data, CAT_DATA_TYPES.dataTypesId, CAT_DATA_TYPES.prefix, CAT_DATA_TYPES.postfix"); 
+							$this->db->from("CAT_ENTRY_CONTENTS");
+							$this->db->join("DET_ENTRY_CONTENTS", "CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ", "INNER");
+							$this->db->join("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+							$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = \'".md5($row->entryContentsId)."\'  ")->get();
+
+							$dataRow = array();
+							foreach ($rs_qry->result() as $rowData)
+								$dataRow[MD5($rowData->dataTypesId)] = array(
+																"data"=>$rowData->prefix.$rowData->data.$rowData->postfix,
+																"dataTypeId"=>$rowData->dataTypesId);
+							
+							$dataRow["entryContentsId"] = $row->entryContentsId;
+							array_push($output->'.$this->toCamelString($row->name).'_elements,$dataRow);
+						}
+						$perPage 	= '.$perPage.';
+						$output->'.$this->toCamelString($row->name).'_actual_page = $actualPage = $this->ACTUAL_PAGE;
+						$actualPage--;
+						if($perPage>0){
+							$output->'.$this->toCamelString($row->name).'_total_pages = ($cnt-($cnt%$perPage))/$perPage + ($cnt%$perPage>0?1:0);
+							if($actualPage*$perPage >= $cnt)
+								$output->'.$this->toCamelString($row->name).'_elements = array_slice($output->'.$this->toCamelString($row->name).'_elements, ($actualPage-1)*$perPage,$cnt%$perPage);   
+							else
+								$output->'.$this->toCamelString($row->name).'_elements = array_slice($output->'.$this->toCamelString($row->name).'_elements, ($actualPage-1)*$perPage,$perPage);   
+						}else
+							$output->'.$this->toCamelString($row->name).'_total_pages = 1;
+						
+						$output->'.$this->toCamelString($row->name).'_total_results = $cnt;
+			';
+			return $code;
+		}
+		
+		
+		/*	foreach-substructure-element: page Function	*/
+		function get_foreachsubstructureelement_controller_page_code($statement){
+			
+			return '';
+		}
+		
+		
+		/*	foreach-substructure-element: id Function	*/
+		function _get_foreachsubstructureelement_controller_id_code($statement){
+			
+			$posStart 	= strpos($statement,'structureId=')+strlen('structureId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			
+			$structure 	= substr($statement, $posStart, $posEnd-$posStart);
+			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
+						from('CAT_ENTRY_STRUCTURES')->
+						where('MD5(entryStructuresId)',$structure)->get();
+			$row = $rs->row();
+			$code = '
+						$this->db->select("*"); 
+						$this->db->from("CAT_ENTRY_CONTENTS");
+						$this->db->join("DET_ENTRY_CONTENTS", "CAT_ENTRY_CONTENTS.entryContentsId  = DET_ENTRY_CONTENTS.entryContentsId ", "INNER");
+						$this->db->join("CAT_DATA_TYPES", "DET_ENTRY_CONTENTS.dataTypesId  	= CAT_DATA_TYPES.dataTypesId ", "INNER");
+						$rs_qry = $this->db->where("MD5(DET_ENTRY_CONTENTS.entrycontentsId) = \'".MD5($valueId)."\'  ")->get();
+			';
+			return '<?php foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
+		}
+		/*  foreach-substructure-element: View Code Generator */
+		function get_foreachsubstructureelement_view_code($statement){
+			
+			$posStart 	= strpos($statement,'structureId=')+strlen('structureId=')+1;
+			$posSpace	= strpos($statement,' ',$posStart);
+			$posEnd	 	= strpos($statement,'%',2);
+			$posEnd 	= $posEnd<$posSpace ? ($posEnd>0?$posEnd:$posSpace) : ($posSpace>0?$posSpace:$posEnd) - 1;
+			
+			$structure 	= substr($statement, $posStart, $posEnd-$posStart);
+			$rs = $this->CI->db->select('CAT_ENTRY_STRUCTURES.*')->
+						from('CAT_ENTRY_STRUCTURES')->
+						where('MD5(entryStructuresId)',$structure)->get();
+			$row = $rs->row();
+			return '<?php foreach($'.$this->toCamelString($row->name).'_elements as $'.$this->toCamelString($row->name).'_element): ?>';
+		}
+		
+		
 		/*************************************************************************************
 			 end-loop
 		**************************************************************************************/

@@ -449,7 +449,6 @@ input[type="submit"]{ background-color: transparent;}
 			background-repeat: no-repeat;
 		}*/
 
-		/* Primer Nivel */
 		.accordion > li > a{
 			font-size: 15px;
 			text-transform: uppercase;
@@ -541,7 +540,7 @@ input[type="submit"]{ background-color: transparent;}
 				}
 
 
-		/* Segundo nivel */
+		/* Primer Nivel */
 		.accordion > li > ul > li > a{
 			font-size: 14px;
 			height: 30px;
@@ -577,7 +576,7 @@ input[type="submit"]{ background-color: transparent;}
 			/*.accordion > li > ul > li > a:active{ color: #084c8e;}*/
 
 
-		/* Tercer nivel */
+		/* Segundo nivel */
 		.accordion > li > ul > li > ul > li > a {
 			font-size: 13px;
 			height: 30px;
@@ -601,7 +600,7 @@ input[type="submit"]{ background-color: transparent;}
 				}
 					.accordion li li a.open-node{ background-image: url(../img/buttons/arrow-inner-open.png);}*/
 
-		/* Cuarto nivel */
+		/* Tercer nivel */
 		.accordion > li > ul > li > ul > li > ul > li > a {
 			font-size: 13px;
 			height: 30px;
@@ -617,6 +616,17 @@ input[type="submit"]{ background-color: transparent;}
 			.accordion li li li a.jqcNode{ background-position: 12% 40%;}
 
 			.accordion li li li li a{ padding-left: 52px;}*/
+
+
+		/* Cuarto nivel */
+		.accordion > li > ul > li > ul > li > ul > li > ul > li a {
+			font-size: 12px;
+			height: 30px;
+			line-height: 30px;
+			padding-left: 56px;
+		}
+			.accordion > li > ul > li > ul > li > ul > li > ul > li a:link { color: #838380;}
+			.accordion > li > ul > li > ul > li > ul > li > ul > li a:hover{ color: #287475;}
 
 
 /* $tabs ---------------------------------------------------------- */
